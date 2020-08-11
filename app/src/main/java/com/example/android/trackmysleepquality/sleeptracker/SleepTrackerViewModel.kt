@@ -103,6 +103,15 @@ class SleepTrackerViewModel(
             database.clear()
         }
     }
+    val startButtonVisible = Transformations.map(tonight) {
+        it == null
+    }
+    val stopButtonVisible = Transformations.map(tonight) {
+        it != null
+    }
+    val clearButtonVisible = Transformations.map(nights) {
+        it?.isNotEmpty()
+    }
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
