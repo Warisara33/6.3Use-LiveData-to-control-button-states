@@ -65,6 +65,13 @@ class SleepTrackerViewModel(
             database.update(night)
         }
     }
+    fun doneShowingSnackbar() {
+        _showSnackbarEvent.value = false
+    }
+    private var _showSnackbarEvent = MutableLiveData<Boolean>()
+
+    val showSnackBarEvent: LiveData<Boolean>
+        get() = _showSnackbarEvent
     private val _navigateToSleepQuality = MutableLiveData<SleepNight>()
 
     val navigateToSleepQuality: LiveData<SleepNight>
@@ -95,6 +102,7 @@ class SleepTrackerViewModel(
         uiScope.launch {
             clear()
             tonight.value = null
+            _showSnackbarEvent.value = true
         }
     }
 
